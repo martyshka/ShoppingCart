@@ -1,0 +1,29 @@
+{
+    "name": "cyrkulewski/shopping-cart",
+    "description": "Simple ZF2 Shopping Cart",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aleksander Cyrkulewski",
+            "email": "cyrkulewski@gmail.com"
+        }
+    ],
+    "keywords" : [
+        "shopping-cart",
+        "zf2"
+    ],
+    "homepage" : "https://github.com/martyshka/ShoppingCart",
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.0",
+        "zendframework/zendframework" : "2.*"
+    },
+    "autoload" : {
+        "psr-0" : {
+            "ShoppingCart" : "src"
+        },
+        "classmap" : [
+            "./Module.php"
+        ]
+    }
+}
