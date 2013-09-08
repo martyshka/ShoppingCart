@@ -132,7 +132,7 @@ FunctionsReference
     <tr><td>$this->ShoppingCart()->remove();</td><td>Delete the item from the cart.</td></tr>
     <tr><td>$this->ShoppingCart()->destroy();</td><td>Delete all items from the cart.</td></tr>
     <tr><td>$this->ShoppingCart()->cart();</td><td>Extracts all items from the cart.</td></tr>
-    <tr><td>$this->ShoppingCart()->total_sum();</td><td>Counts the total summ of all items in the cart.</td></tr>
+    <tr><td>$this->ShoppingCart()->total_sum();</td><td>Counts the total sum of all items in the cart.</td></tr>
     <tr><td>$this->ShoppingCart()->total_items();</td><td>Counts the total number of all items in the cart.</td></tr>
 </table>
 
