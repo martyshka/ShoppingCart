@@ -1,11 +1,11 @@
 ZendCart
 ============================
 
-This model allows you to manage a shopping cart for e-commerce in an easy, simple and fast.
+This model is a simple ZF2 Shopping Cart solution. Provide basic functionality to create and modify Shopping Cart with any content in it. Easy to extend, just create your own Cart Entity and push it during Cart initialisation.
 
 Inspired by
 ------------
-http://github.com/vikey89/ZendCart
+I was inspired to create the ShoppingCart by great job of Vincenzo Provenza and Concetto Vecchio (http://github.com/vikey89/ZendCart). Keeped the same idea behind but made it more flexible, easier to extend and simplier to change.
 
 
 Installation
@@ -13,14 +13,14 @@ Installation
 For the installation uses composer [composer](http://getcomposer.org "composer - package manager").
 
 ```sh
-php composer.phar require  shoppingcart/shoppingcart:dev-master
+php composer.phar require  cyrkulewski/shopping-cart:dev-master
 ```
 
 Add this project in your composer.json:
 
 
     "require": {
-        "shoppingcart/shoppingcart": "dev-master"
+        "cyrkulewski/shopping-cart": "dev-master"
     }
     
 
