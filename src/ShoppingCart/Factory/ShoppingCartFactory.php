@@ -1,11 +1,12 @@
 <?php
-
 /**
  * ShoppingCart Factory
+ * Initializate Shopping Cart
  * 
+ * @package ShoppingCart
+ * @subpackage Factory
  * @author Aleksander Cyrkulewski
  */
-
 namespace ShoppingCart\Factory;
 
 use Zend\ServiceManager\FactoryInterface;
@@ -17,15 +18,16 @@ use ShoppingCart\Entity\ShoppingCartEntity;
 
 class ShoppingCartFactory implements FactoryInterface
 {
+
     public function createService(ServiceLocatorInterface $servicelocator)
     {
         $allServices = $servicelocator->getServiceLocator();
         $config = $allServices->get('ServiceManager')->get('Configuration');
-
+        
         if (! isset($config['shopping_cart'])) {
             throw new \Exception('Configuration ShoppingCart not set.');
         }
-
+        
         $cart = new ShoppingCart();
         $cart->setHydrator(new ShoppingCartHydrator());
         $cart->setEntityPrototype(new ShoppingCartEntity());

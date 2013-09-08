@@ -1,12 +1,10 @@
 <?php
 /**
  * ShoppingCart Plugin
+ * Provides basic functionality of Shopping Cart.
  *
- * @package ZF2 Modules
- * @category Plugin
- * @copyright 2013
- * @version 1.0
- *
+ * @package ShoppingCart
+ * @subpackage Plugin
  * @author Aleksander Cyrkulewski
  */
 namespace ShoppingCart\Controller\Plugin;
@@ -21,19 +19,20 @@ class ShoppingCart extends AbstractPlugin
     private $entityPrototype;
 
     private $hydrator;
-    
+
     private $config;
-    
 
     /**
-     * @param Zend\Session\Container $session
+     *
+     * @param Zend\Session\Container $session            
      */
     public function setSession($session)
     {
         $this->session = $session;
     }
 
-	/**
+    /**
+     *
      * @param $entityPrototype
      */
     public function setEntityPrototype($entityPrototype)
@@ -41,26 +40,28 @@ class ShoppingCart extends AbstractPlugin
         $this->entityPrototype = $entityPrototype;
     }
 
-	/**
-     * @param Hydrator $hydrator
+    /**
+     *
+     * @param Hydrator $hydrator            
      */
     public function setHydrator($hydrator)
     {
         $this->hydrator = $hydrator;
     }
-    
+
     /**
-     * @param array $config
+     *
+     * @param array $config            
      */
     public function setConfig($config)
     {
         $this->config = $config;
     }
 
-	/**
+    /**
      * Add a product(s) to cart
      *
-     * @param array $items
+     * @param array $items            
      * @return true
      */
     public function insert(array $items)
@@ -75,31 +76,32 @@ class ShoppingCart extends AbstractPlugin
         
         if ($this->isMultidimention($items)) {
             foreach ($items as $item) {
-                $this->session['cart'][$this->generateToken($item)] = $this->hydrator->hydrate($item, new $this->entityPrototype);
+                $this->session['cart'][$this->generateToken($item)] = $this->hydrator->hydrate($item, new $this->entityPrototype());
             }
         } else {
             $this->session['cart'][$this->generateToken($items)] = $this->hydrator->hydrate($items, $this->entityPrototype);
         }
         return true;
     }
-    
-    
+
     /**
      * Generate unique token ID for each item in cart
-     * 
-     * @param array $item
+     *
+     * @param array $item            
      * @return string
      */
     private function generateToken(array $item)
     {
+        if (! is_array($item) or empty($item)) {
+            throw new \Exception('The value must be an array.');
+        }
         return sha1($item['id'] . $item['qty'] . time());
     }
-    
-    
+
     /**
      * Decide if given array is multidimentional array or not
-     * 
-     * @param array $arr
+     *
+     * @param array $arr            
      * @return boolean
      */
     private function isMultidimention($arr)
@@ -115,7 +117,6 @@ class ShoppingCart extends AbstractPlugin
         return true;
     }
 
-    
     /**
      * Delete all items from the cart
      *
@@ -126,11 +127,11 @@ class ShoppingCart extends AbstractPlugin
         $this->session->offsetUnset('cart');
         return true;
     }
-    
+
     /**
      * Remove one item from shopping cart
-     * 
-     * @param string $token
+     *
+     * @param string $token            
      * @return true
      */
     public function remove($token)
@@ -138,11 +139,10 @@ class ShoppingCart extends AbstractPlugin
         unset($this->session['cart'][$token]);
         return true;
     }
-    
-    
+
     /**
      * Counts the total number of items in the cart
-     * 
+     *
      * @return int
      */
     public function total_items()
@@ -156,13 +156,12 @@ class ShoppingCart extends AbstractPlugin
         }
         return (int) $total_items;
     }
-    
-    
+
     /**
      * Counts the total sum of the cart
-     * 
-     * @param int $round
-     * @param bool $with_vat
+     *
+     * @param int $round            
+     * @param bool $with_vat            
      * @return number
      */
     public function total_sum($round = 2, $with_vat = false)
@@ -180,7 +179,6 @@ class ShoppingCart extends AbstractPlugin
         }
         return (float) round($sum, (int) $round);
     }
-    
 
     /**
      * Return cart content
@@ -195,5 +193,4 @@ class ShoppingCart extends AbstractPlugin
         }
         return $items;
     }
-
 }
