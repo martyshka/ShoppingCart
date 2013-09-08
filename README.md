@@ -111,6 +111,16 @@ return new ViewModel(array(
 ));
 ```
 
+How to change/extend Shopping Cart
+=====================================
+Provided Shopping Cart Entity is really basic one. You can change the structure of it. For example, if you need to add options to each item in the cart or to provide discount field and so on. What you should do:
+* copy ShoppingCart/Entity/ShoppingCartEntity to your module
+* modify YourModule/Entity/ShoppingCartEntity: add any fields you need to have
+* during Shopping Cart initialisation provide your YourModule/Entity/ShoppingCartEntity
+```php
+$this->ShoppingCart()->setEntityPrototype(new YourModule/Entity/ShoppingCartEntity());
+```
+
 
 FunctionsReference
 ------------
@@ -118,12 +128,12 @@ FunctionsReference
     <tr>
     <td>Function</td>
     <td>Description</td></tr>
-    <tr><td>$this->ShoppingCart()->insert();</td><td>Add a product to cart.</td></tr>
+    <tr><td>$this->ShoppingCart()->insert();</td><td>Add item(s) to cart.</td></tr>
     <tr><td>$this->ShoppingCart()->remove();</td><td>Delete the item from the cart.</td></tr>
     <tr><td>$this->ShoppingCart()->destroy();</td><td>Delete all items from the cart.</td></tr>
     <tr><td>$this->ShoppingCart()->cart();</td><td>Extracts all items from the cart.</td></tr>
-    <tr><td>$this->ShoppingCart()->total_sum();</td><td>Counts the total number of items in cart</td></tr>
-    <tr><td>$this->ShoppingCart()->total_items();</td><td>Counts the total number of items in cart</td></tr>
+    <tr><td>$this->ShoppingCart()->total_sum();</td><td>Counts the total summ of all items in the cart.</td></tr>
+    <tr><td>$this->ShoppingCart()->total_items();</td><td>Counts the total number of all items in the cart.</td></tr>
 </table>
 
 Contributors
