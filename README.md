@@ -1,4 +1,4 @@
-ZendCart
+ShoppingCart
 ============================
 
 This model is a simple ZF2 Shopping Cart solution. Provide basic functionality to create and modify Shopping Cart with any content in it. Easy to extend, just create your own Cart Entity and push it during Cart initialisation.
@@ -36,14 +36,34 @@ Examples
 =====================================
 Insert
 ------------
+You can insert as many items to the cart as you want. Each entry in cart will have unique token to work with.
+Example with one product:
 ```php
 $product = array(
     'id'      => 'XYZ',
     'qty'     => 1,
     'price'   => 15.15,
-    'product' => 'Book',
+    'product' => 'Book: ZF2 for beginners',
 );
-$this->ZendCart()->insert($product);
+$this->ShoppingCart()->insert($product);
+```
+Example with 2 products:
+```php
+$products = array(
+    array(
+        'id'      => 'XYZ',
+        'qty'     => 1,
+        'price'   => 15.15,
+        'product' => 'Book: ZF2 for beginners',
+    ),
+    array(
+        'id'      => 'ZYX',
+        'qty'     => 3,
+        'price'   => 19.99,
+        'product' => 'Book: ZF2 for advanced users',
+    )
+);
+$this->ShoppingCart()->insert($products);
 ```
 
 
@@ -51,31 +71,33 @@ Remove
 ------------
 ```php
 $token => '4b848870240fd2e976ee59831b34314f7cfbb05b';
-$this->ZendCart()->remove($token);
+$this->ShoppingCart()->remove($token);
 ```
 
 Destroy
 ------------
+Erase Shopping Cart completely.
 ```php
-$this->ZendCart()->destroy();
+$this->ShoppingCart()->destroy();
 ```
 
 Cart
 ------------
+Get all content of Cart.
 ```php
-$this->ZendCart()->cart();
+$this->ShoppingCart()->cart();
 ```
 
 Total Sum
 ------------
 ```php
-$this->ZendCart()->total_sum();
+$this->ShoppingCart()->total_sum();
 ```
 
 Total Items
 ------------
 ```php
-$this->ZendCart()->total_items();
+$this->ShoppingCart()->total_items();
 ```
 
 
@@ -83,9 +105,9 @@ Example in controller
 ------------
 ```php
 return new ViewModel(array(
-    'cart' => $this->ZendCart()->cart(),
-    'total_items' => $this->ZendCart()->total_items(),
-    'total_sum' => $this->ZendCart()->total_sum(),
+    'cart' => $this->ShoppingCart()->cart(),
+    'total_items' => $this->ShoppingCart()->total_items(),
+    'total_sum' => $this->ShoppingCart()->total_sum(),
 ));
 ```
 
@@ -96,15 +118,15 @@ FunctionsReference
     <tr>
     <td>Function</td>
     <td>Description</td></tr>
-    <tr><td>$this->ZendCart()->insert();</td><td>Add a product to cart.</td></tr>
-    <tr><td>$this->ZendCart()->remove();</td><td>Delete the item from the cart.</td></tr>
-    <tr><td>$this->ZendCart()->destroy();</td><td>Delete all items from the cart.</td></tr>
-    <tr><td>$this->ZendCart()->cart();</td><td>Extracts all items from the cart.</td></tr>
-    <tr><td>$this->ZendCart()->total_sum();</td><td>Counts the total number of items in cart</td></tr>
-    <tr><td>$this->ZendCart()->total_items();</td><td>Counts the total number of items in cart</td></tr>
+    <tr><td>$this->ShoppingCart()->insert();</td><td>Add a product to cart.</td></tr>
+    <tr><td>$this->ShoppingCart()->remove();</td><td>Delete the item from the cart.</td></tr>
+    <tr><td>$this->ShoppingCart()->destroy();</td><td>Delete all items from the cart.</td></tr>
+    <tr><td>$this->ShoppingCart()->cart();</td><td>Extracts all items from the cart.</td></tr>
+    <tr><td>$this->ShoppingCart()->total_sum();</td><td>Counts the total number of items in cart</td></tr>
+    <tr><td>$this->ShoppingCart()->total_items();</td><td>Counts the total number of items in cart</td></tr>
 </table>
 
 Contributors
 =====================================
 
-* Aleksander Cyrkulewski - cyrkulewski@gmail.com
+Aleksander Cyrkulewski - cyrkulewski@gmail.com
