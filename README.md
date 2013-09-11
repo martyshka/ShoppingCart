@@ -11,11 +11,6 @@ I was inspired to create the ShoppingCart by great job of Vincenzo Provenza and 
 Installation
 ------------
 For the installation uses composer [composer](http://getcomposer.org "composer - package manager").
-
-```sh
-php composer.phar require  cyrkulewski/shopping-cart:dev-master
-```
-
 Add this project in your composer.json:
 
 
@@ -117,6 +112,7 @@ Provided Shopping Cart Entity is really basic one. You can change the structure 
 * copy ShoppingCart/Entity/ShoppingCartEntity to your module
 * modify YourModule/Entity/ShoppingCartEntity: add any fields you need to have
 * during Shopping Cart initialisation provide your YourModule/Entity/ShoppingCartEntity
+
 ```php
 $this->ShoppingCart()->setEntityPrototype(new YourModule/Entity/ShoppingCartEntity());
 ```
