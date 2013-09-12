@@ -17,51 +17,89 @@ use ShoppingCart\Entity\ShoppingCartEntityInterface;
 class ShoppingCartEntity implements ShoppingCartEntityInterface
 {
 
+    /**
+     * @var int
+     */
     protected $id;
 
+    /**
+     * @var string
+     */
     protected $product;
 
+    /**
+     * @var int
+     */
     protected $qty;
 
+    /**
+     * @var float
+     */
     protected $price;
-
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
+    
+	/**
+     * @return the $id
+     */
     public function getId()
     {
         return $this->id;
     }
 
+	/**
+     * @return the $product
+     */
     public function getProduct()
     {
         return $this->product;
     }
 
+	/**
+     * @return the $qty
+     */
     public function getQty()
     {
         return $this->qty;
     }
 
+	/**
+     * @return the $price
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+	/**
+     * @param number $id
+     */
     public function setId($id)
     {
         $this->id = $id;
     }
 
+	/**
+     * @param string $product
+     */
     public function setProduct($product)
     {
         $this->product = $product;
     }
 
+	/**
+     * @param number $qty
+     */
     public function setQty($qty)
     {
         $this->qty = $qty;
     }
 
+	/**
+     * @param number $price
+     */
     public function setPrice($price)
     {
         $this->price = $price;
     }
+
+
 }

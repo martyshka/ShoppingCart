@@ -14,12 +14,24 @@ use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 class ShoppingCart extends AbstractPlugin
 {
 
+    /**
+     * @var Zend\Session\Container
+     */
     private $session;
 
+    /**
+     * @var object
+     */
     private $entityPrototype;
 
+    /**
+     * @var Hydrator
+     */
     private $hydrator;
 
+    /**
+     * @var array
+     */
     private $config;
 
     /**
@@ -50,7 +62,6 @@ class ShoppingCart extends AbstractPlugin
     }
 
     /**
-     *
      * @param array $config            
      */
     public function setConfig($config)

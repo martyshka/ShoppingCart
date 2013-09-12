@@ -36,7 +36,7 @@ class ShoppingCartHydrator extends ClassMethods
      *
      * @param array $data 
      * @param object $object 
-     * @return StatusPurchaseEntity
+     * @return object
      * @throws \Exception
      */
     public function hydrate(array $data, $object)
