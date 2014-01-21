@@ -15,7 +15,7 @@ Add this project in your composer.json:
 
 
     "require": {
-        "cyrkulewski/shopping-cart": "dev-master"
+        "cyrkulewski/shopping-cart": "v1.0.0"
     }
     
 
