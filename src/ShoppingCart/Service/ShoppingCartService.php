@@ -1,21 +1,12 @@
 <?php
-/**
- * ShoppingCart Plugin
- * Provides basic functionality of Shopping Cart.
- *
- * @package ShoppingCart
- * @subpackage Plugin
- * @author Aleksander Cyrkulewski
- */
-namespace ShoppingCart\Controller\Plugin;
+namespace ShoppingCart\Service;
 
-use Zend\Mvc\Controller\Plugin\AbstractPlugin;
+use Zend\Form\Annotation\Hydrator;
 
-class ShoppingCart extends AbstractPlugin
+class ShoppingCartService
 {
-
     /**
-     * @var Zend\Session\Container
+     * @var \Zend\Session\Container
      */
     private $session;
 
@@ -35,56 +26,21 @@ class ShoppingCart extends AbstractPlugin
     private $config;
 
     /**
-     *
-     * @param Zend\Session\Container $session            
-     */
-    public function setSession($session)
-    {
-        $this->session = $session;
-    }
-
-    /**
-     *
-     * @param $entityPrototype
-     */
-    public function setEntityPrototype($entityPrototype)
-    {
-        $this->entityPrototype = $entityPrototype;
-    }
-
-    /**
-     *
-     * @param Hydrator $hydrator            
-     */
-    public function setHydrator($hydrator)
-    {
-        $this->hydrator = $hydrator;
-    }
-
-    /**
-     * @param array $config            
-     */
-    public function setConfig($config)
-    {
-        $this->config = $config;
-    }
-
-    /**
-     * Add a product(s) to cart
-     *
-     * @param array $items            
-     * @return true
+     * Add product(s) to cart
+     * @param array $items
+     * @return bool
+     * @throws \Exception
      */
     public function insert(array $items)
     {
         if (! is_array($items) or empty($items)) {
             throw new \Exception('Only correct values could be saved in Shopping cart.');
         }
-        
+
         if (! is_array($this->session['cart'])) {
             $this->session['cart'] = array();
         }
-        
+
         if ($this->isMultidimention($items)) {
             foreach ($items as $item) {
                 $this->session['cart'][$this->generateToken($item)] = $this->hydrator->hydrate($item, new $this->entityPrototype());
@@ -98,21 +54,23 @@ class ShoppingCart extends AbstractPlugin
     /**
      * Generate unique token ID for each item in cart
      *
-     * @param array $item            
+     * @param array $item
      * @return string
+     * @throws \Exception
      */
     private function generateToken(array $item)
     {
         if (! is_array($item) or empty($item)) {
             throw new \Exception('The value must be an array.');
         }
+
         return sha1($item['id'] . $item['qty'] . time());
     }
 
     /**
      * Decide if given array is multidimentional array or not
      *
-     * @param array $arr            
+     * @param array $arr
      * @return boolean
      */
     private function isMultidimention($arr)
@@ -120,11 +78,13 @@ class ShoppingCart extends AbstractPlugin
         if (! is_array($arr)) {
             return false;
         }
+
         foreach ($arr as $elm) {
             if (! is_array($elm)) {
                 return false;
             }
         }
+
         return true;
     }
 
@@ -142,7 +102,7 @@ class ShoppingCart extends AbstractPlugin
     /**
      * Remove one item from shopping cart
      *
-     * @param string $token            
+     * @param string $token
      * @return true
      */
     public function remove($token)
@@ -171,8 +131,8 @@ class ShoppingCart extends AbstractPlugin
     /**
      * Counts the total sum of the cart
      *
-     * @param int $round            
-     * @param bool $with_vat            
+     * @param int $round
+     * @param bool $with_vat
      * @return number
      */
     public function total_sum($round = 2, $with_vat = false)
@@ -203,5 +163,40 @@ class ShoppingCart extends AbstractPlugin
             return array();
         }
         return $items;
+    }
+
+    /**
+     *
+     * @param \Zend\Session\Container $session
+     */
+    public function setSession($session)
+    {
+        $this->session = $session;
+    }
+
+    /**
+     *
+     * @param $entityPrototype
+     */
+    public function setEntityPrototype($entityPrototype)
+    {
+        $this->entityPrototype = $entityPrototype;
+    }
+
+    /**
+     *
+     * @param Hydrator $hydrator
+     */
+    public function setHydrator($hydrator)
+    {
+        $this->hydrator = $hydrator;
+    }
+
+    /**
+     * @param array $config
+     */
+    public function setConfig($config)
+    {
+        $this->config = $config;
     }
 }
