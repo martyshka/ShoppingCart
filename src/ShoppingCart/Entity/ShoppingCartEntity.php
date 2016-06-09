@@ -106,11 +106,17 @@ class ShoppingCartEntity implements ShoppingCartEntityInterface
         $this->price = $price;
     }
 
-    public function setProductProperties($properties)
+    /**
+     * @param array $properties
+     */
+    public function setProductProperties(array $properties)
     {
         $this->product_properties = $properties;
     }
 
+    /**
+     * @return array
+     */
     public function getProductProperties()
     {
         return $this->product_properties;
