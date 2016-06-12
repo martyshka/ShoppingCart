@@ -2,10 +2,10 @@
 /**
  * Basic Shopping Cart entity
  * -------------------------------------------------------
- * You can easily create your own Entity to pass any parameters you need to have in Cart. 
+ * You can easily create your own Entity to pass any parameters you need to have in Cart.
  * Just create Cart Entity in your module, don't forget to implement ShoppingCartEntityInterface.
  * Here are 4 required fields to have Cart working: id, product, qty, price.
- * 
+ *
  * @package ShoppingCart
  * @subpackage Entity
  * @author Aleksander Cyrkulewski
@@ -36,8 +36,13 @@ class ShoppingCartEntity implements ShoppingCartEntityInterface
      * @var float
      */
     protected $price;
-    
-	/**
+
+    /**
+     * @var array
+     */
+    protected $product_properties = array();
+
+    /**
      * @return the $id
      */
     public function getId()
@@ -45,7 +50,7 @@ class ShoppingCartEntity implements ShoppingCartEntityInterface
         return $this->id;
     }
 
-	/**
+    /**
      * @return the $product
      */
     public function getProduct()
@@ -53,7 +58,7 @@ class ShoppingCartEntity implements ShoppingCartEntityInterface
         return $this->product;
     }
 
-	/**
+    /**
      * @return the $qty
      */
     public function getQty()
@@ -61,7 +66,7 @@ class ShoppingCartEntity implements ShoppingCartEntityInterface
         return $this->qty;
     }
 
-	/**
+    /**
      * @return the $price
      */
     public function getPrice()
@@ -69,7 +74,7 @@ class ShoppingCartEntity implements ShoppingCartEntityInterface
         return $this->price;
     }
 
-	/**
+    /**
      * @param number $id
      */
     public function setId($id)
@@ -77,7 +82,7 @@ class ShoppingCartEntity implements ShoppingCartEntityInterface
         $this->id = $id;
     }
 
-	/**
+    /**
      * @param string $product
      */
     public function setProduct($product)
@@ -85,7 +90,7 @@ class ShoppingCartEntity implements ShoppingCartEntityInterface
         $this->product = $product;
     }
 
-	/**
+    /**
      * @param number $qty
      */
     public function setQty($qty)
@@ -93,7 +98,7 @@ class ShoppingCartEntity implements ShoppingCartEntityInterface
         $this->qty = $qty;
     }
 
-	/**
+    /**
      * @param number $price
      */
     public function setPrice($price)
@@ -101,5 +106,19 @@ class ShoppingCartEntity implements ShoppingCartEntityInterface
         $this->price = $price;
     }
 
+    /**
+     * @param array $properties
+     */
+    public function setProductProperties(array $properties)
+    {
+        $this->product_properties = $properties;
+    }
 
+    /**
+     * @return array
+     */
+    public function getProductProperties()
+    {
+        return $this->product_properties;
+    }
 }
